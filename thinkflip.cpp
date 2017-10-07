@@ -2,7 +2,10 @@
 Thinkvantage button fliplop software
 This program is designed to be mapped to two commands that run in a filp flop maner
 */
-#include 
+#include <iostream>
+#include <string>
+#include <fstream>
+
 init() //to be run the first time the program runs in order to setup file structure so the logic works
 {
 
