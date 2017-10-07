@@ -1,6 +1,11 @@
 /* 
 Thinkvantage button fliplop software
 This program is designed to be mapped to two commands that run in a filp flop maner
+Just compile name it whatever you want I used thinkflip, copy it to /bin
+you can then set the button you want as the toggle
+in my case I use I3-gaps as my window manager, so i edited the config file and added
+bindsym XF86Launch1 exec thinkflip
+and it works great
 */
 #include <iostream>
 #include <string>
@@ -26,7 +31,7 @@ int main()
 	{
 		cout << "Running INIT\n";
 		init();							//runs init and creates file
-		cout <<"returned 128";
+		//cout <<"returned 128";
 		return 128;						//specal return code
 	}
 	ifstream readfilestate;				//filestate for reading file
@@ -36,8 +41,8 @@ int main()
 	readfilestate.read(buffer, 1);		//read file and store value in buffer
 	readfilestate.close();
 	bool state;							//false = 0 true = 1
-	cout << "buffer is equal to " << buffer[0];
-	cin.ignore();
+	//cout << "buffer is equal to " << buffer[0];
+	//cin.ignore();
 	if (buffer[0] == '1')			//if buffer =1 then state = true
 	{
 		state=true;					//Sets state to true
@@ -47,23 +52,24 @@ int main()
 		state=false;				//Sets state to false
 	}
 
-	if (state == true)				//for debug
+	/*if (state == true)				//for debug
 	{								//for debug
 		cout << "true";				//for debug
 	}								//for debug
 	if (state == false)				//for debug
 	{								//for debug
 		cout << "false";			//for debug
-	}								//for debug
-	cin.ignore();
+	}
+	*/								//for debug
+	//cin.ignore();
 	filestate.open("state");		//open file
 	if(state == false)				//file at location 0 = 0 do this
 	{
 		filestate << "1";			//put number 1 into file
 		filestate.close();			//closes filestream
-		system("redshift -O 2700");	//runs redshift for nighttime
-		cout <<"returned 0";		//for debug
-		cin.ignore();
+		system("redshift -O 2700");	//runs redshift for nighttime //EDIT HERE TO CHANGE COMMAND TO WHATEVER YOU WANT
+		//cout <<"returned 0";		//for debug
+		//cin.ignore();
 		return 0;					//command completed successfully for 0
 	}
 
@@ -71,12 +77,12 @@ int main()
 	{
 		filestate << "0";
 		filestate.close();			
-		system("redshift -x");		//runs redshift for nighttime
-		cout <<"returned 1";		//for debug
-		cin.ignore();
+		system("redshift -x");		//runs redshift for nighttime //EDIT HERE TO CHANGE COMMAND TO WHATEVER YOU WANT
+		//cout <<"returned 1";		//for debug
+		//cin.ignore();			//for debug
 		return 1;					//command completed successfully for 1
 	}
 	cout <<"returned 0x123FF";
-	cin.ignore();
+	//cin.ignore();					//for debug
 	return 0x123FF;					//program has an error most likely because the init failed
 }
